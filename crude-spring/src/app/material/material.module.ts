@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+
 import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
@@ -8,9 +11,11 @@ import { DomSanitizer } from '@angular/platform-browser';
   imports: [
     CommonModule,
     MatIconModule,
+    MatToolbarModule
   ],
   exports: [
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule
   ]
 })
 
