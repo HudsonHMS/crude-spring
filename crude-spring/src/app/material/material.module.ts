@@ -5,17 +5,19 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
   ],
   exports: [
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
   ]
 })
 

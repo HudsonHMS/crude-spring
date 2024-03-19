@@ -1,4 +1,6 @@
+import { CursosService } from './../cursos/cursos.service';
 import { Component } from '@angular/core';
+import { Cursos } from '../models/cursos';
 
 @Component({
   selector: 'app-lista-de-cursos',
@@ -6,9 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./lista-de-cursos.component.scss']
 })
 export class ListaDeCursosComponent {
-    public cursos: string[] = ['Java', 'PHP', 'Angular'];
+
+    constructor( private cursosService: CursosService ) {}
+
+    public cursos!: Cursos[];
+    public colunas = [ 'id', 'nome', 'valor', 'categoria', 'actions' ];
 
     ngOnInit(): void {
-
+      this.cursos = this.cursosService.getCursos();
     }
 }

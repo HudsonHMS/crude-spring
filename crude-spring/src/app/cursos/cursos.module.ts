@@ -1,3 +1,4 @@
+import { MaterialModule } from './../material/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +11,7 @@ import { ListaDeCursosComponent } from '../lista-de-cursos/lista-de-cursos.compo
     ListaDeCursosComponent
   ],
   imports: [
+    MaterialModule,
     CommonModule,
     CursosRoutingModule
   ]
