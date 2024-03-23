@@ -1,5 +1,12 @@
 <div class="container-fluid mt-3">
 
+    <mat-toolbar color="secondary" class="mb-2">
+        <div class="d-flex justify-content-between w-100">
+          <span>Cursos</span>
+          <button mat-raised-button color="primary">Novo Curso</button>
+        </div>
+    </mat-toolbar>
+
   <table mat-table [dataSource]="cursos" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -31,5 +38,4 @@
     <tr mat-header-row *matHeaderRowDef="colunas"></tr>
     <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
   </table>
-
 </div>

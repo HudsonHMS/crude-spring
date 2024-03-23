@@ -15,6 +15,10 @@ export class ListaDeCursosComponent {
     public colunas = [ 'id', 'nome', 'valor', 'categoria', 'actions' ];
 
     ngOnInit(): void {
-      this.cursos = this.cursosService.getCursos();
+      this.cursosService.getCursos().subscribe(
+        cursos => {
+          this.cursos = cursos
+        }
+      );
     }
 }
