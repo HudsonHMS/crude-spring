@@ -7,20 +7,23 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatButtonModule
-  ],
   exports: [
     MatIconModule,
     MatToolbarModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule
   ]
 })
 
