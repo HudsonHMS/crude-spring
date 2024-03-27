@@ -1,9 +1,10 @@
 import { CursosFormComponent } from './../cursos/cursos-form/cursos-form.component';
 import { DialogAlertComponent } from './../shared/dialog-alert/dialog-alert.component';
 import { CursosService } from './../cursos/cursos.service';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { Cursos } from '../models/cursos';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-lista-de-cursos',
@@ -12,11 +13,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ListaDeCursosComponent {
 
-    constructor( private cursosService: CursosService, private dialogRef: MatDialog ) {}
+    constructor( private cursosService: CursosService, private dialog: MatDialog, private detector: ChangeDetectorRef ) {}
 
     public cursos!: Cursos[];
     public colunas = [ 'id', 'nome', 'valor', 'categoria', 'actions' ];
     public load:boolean = true;
+    private formCad!: MatDialogRef<CursosFormComponent>;
+
+    @ViewChild('table') private table!: MatTable<Cursos>;
 
     ngOnInit(): void {
 
@@ -35,7 +39,7 @@ export class ListaDeCursosComponent {
     }
 
     openError( msg: string, width: string, heigth: string ): void {
-      this.dialogRef.open(DialogAlertComponent, {
+      this.dialog.open(DialogAlertComponent, {
         data: msg,
         width: width,
         height: heigth,
@@ -43,14 +47,26 @@ export class ListaDeCursosComponent {
     }
 
     closeError(): void {
-      this.dialogRef.closeAll();
+      this.dialog.closeAll();
     }
 
     openCadastro( largura = '75dvw', altura = '55dvh' ) {
-      this.dialogRef.open(CursosFormComponent, {
+
+      this.dialog.open(CursosFormComponent, {
         width: largura,
         height: altura
-      });
+      }).componentInstance.cadastroSucesso.subscribe(
+        ( res ) => {
+          if( res.statusCode === 201 ) {
+            this.dialog.closeAll();
+            this.cursos.push( res.responseData );
+            this.detector.detectChanges();
+            alert(res.message);
+            this.table.dataSource = [];
+            this.table.dataSource = this.cursos;
+          }
+        }
+      );
     }
 
 }

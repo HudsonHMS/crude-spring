@@ -10,7 +10,7 @@
     </div>
   </mat-toolbar>
 
-  <table mat-table [dataSource]="cursos" class="mat-elevation-z8" *ngIf="!load; else loading" >
+  <table #table mat-table [dataSource]="cursos" class="mat-elevation-z8" *ngIf="!load; else loading" >
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let curso"> {{curso.id}} </td>

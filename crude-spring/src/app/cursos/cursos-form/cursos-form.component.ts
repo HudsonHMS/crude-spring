@@ -1,6 +1,8 @@
+import { ResponseObject } from './../../models/response-object';
 import { CursosService } from './../cursos.service';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Cursos } from 'src/app/models/cursos';
 
 @Component({
   selector: 'app-cursos-form',
@@ -25,14 +27,17 @@ export class CursosFormComponent {
     })
   }
 
+  @Output() cadastroSucesso  = new EventEmitter<ResponseObject<Cursos>>();
 
   submitForm() {
 
     if( this.form.valid ) {
       this.cursosService.cadastrarCurso( this.form.value ).subscribe({
-        next:  res => console.log(res),
+        next:  (res) => {
+          this.cadastroSucesso.emit( res )
+        },
         error: err  => console.log( err ),
-        complete: () => console.log()
+        complete: () => {}
       });
     }
 

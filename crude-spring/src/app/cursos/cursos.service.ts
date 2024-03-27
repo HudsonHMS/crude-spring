@@ -2,6 +2,7 @@ import { Cursos } from './../models/cursos';
 import { delay, from, Observable, of, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ResponseObject } from '../models/response-object';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +21,9 @@ export class CursosService {
     }
   }
 
-  cadastrarCurso( curso: Cursos ): Observable<Cursos> {
+  cadastrarCurso( curso: Cursos ): Observable<ResponseObject<Cursos>> {
     try {
-      return this.httpClient.post<Cursos>('http://localhost:4300/api/cursos', curso).pipe(
+      return this.httpClient.post<ResponseObject<Cursos>>('http://localhost:4300/api/cursos', curso).pipe(
         take(1)
       );
     } catch( err ) {
