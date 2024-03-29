@@ -50,7 +50,7 @@ export class ListaDeCursosComponent {
       this.dialog.closeAll();
     }
 
-    openCadastro( largura = '75dvw', altura = '55dvh' ) {
+    openCadastro( largura = '75dvw', altura = '60dvh' ) {
 
       this.dialog.open(CursosFormComponent, {
         width: largura,

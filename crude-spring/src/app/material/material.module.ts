@@ -12,6 +12,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 @NgModule({
   declarations: [],
   exports: [
@@ -23,7 +27,9 @@ import {MatCardModule} from '@angular/material/card';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule,
+    MatSnackBarModule
   ]
 })
 
