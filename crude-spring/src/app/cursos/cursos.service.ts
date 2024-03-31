@@ -21,9 +21,29 @@ export class CursosService {
     }
   }
 
+  getCursoPorId( id: number ): Observable<ResponseObject<Cursos>> {
+    try{
+      return this.httpClient.get<ResponseObject<Cursos>>(`http://localhost:4300/api/cursos/visualizar/${id}`).pipe(
+        take(1),
+      );
+    } catch( err ) {
+      return from([]);
+    }
+  }
+
   cadastrarCurso( curso: Cursos ): Observable<ResponseObject<Cursos>> {
     try {
       return this.httpClient.post<ResponseObject<Cursos>>('http://localhost:4300/api/cursos', curso).pipe(
+        take(1)
+      );
+    } catch( err ) {
+      return of();
+    }
+  }
+
+  atualizarCurso( curso: Cursos ): Observable<ResponseObject<Cursos>> {
+    try {
+      return this.httpClient.post<ResponseObject<Cursos>>('http://localhost:4300/api/cursos/atualizar', curso).pipe(
         take(1)
       );
     } catch( err ) {

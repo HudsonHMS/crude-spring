@@ -10,40 +10,40 @@
     </div>
   </mat-toolbar>
 
-  <table #table mat-table [dataSource]="cursos" class="mat-elevation-z8" *ngIf="!load; else loading" >
+  <mat-table #table [dataSource]="cursos" class="mat-elevation-z8" *ngIf="!load; else loading" >
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let curso"> {{curso.id}} </td>
+      <mat-header-cell  *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let curso"> {{curso.id}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> CURSO </th>
-      <td mat-cell *matCellDef="let curso"> {{curso.nome}} </td>
+      <mat-header-cell *matHeaderCellDef> CURSO </mat-header-cell>
+      <mat-cell *matCellDef="let curso"> {{curso.nome}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef> VALOR </th>
-      <td mat-cell *matCellDef="let curso"> {{curso.valor}} </td>
+      <mat-header-cell *matHeaderCellDef> VALOR </mat-header-cell>
+      <mat-cell *matCellDef="let curso"> {{curso.valor}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="categoria">
-      <th mat-header-cell *matHeaderCellDef> CATEGORIA </th>
-      <td mat-cell *matCellDef="let curso">
+      <mat-header-cell *matHeaderCellDef> CATEGORIA </mat-header-cell>
+      <mat-cell *matCellDef="let curso">
         {{curso.categoria}}
         <mat-icon class="mat-18" color="primary">{{curso.categoria | categoria}}</mat-icon>
-      </td>
+      </mat-cell>
     </ng-container>
     <ng-container matColumnDef="actions">
-      <th *matHeaderCellDef>AÇÕES</th>
-      <td *matCellDef="let row">
-        <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+      <mat-header-cell *matHeaderCellDef>AÇÕES</mat-header-cell>
+      <mat-cell *matCellDef="let curso">
+        <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary" (click)="openEdicao(curso.id)" >
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
         <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
           <mat-icon aria-label="Delete" color="warn">delete</mat-icon>
         </button>
-      </td>
+      </mat-cell>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="colunas"></tr>
-    <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
-  </table>
+    <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: colunas;"></mat-row>
+  </mat-table>
 </div>
 
 <ng-template #loading>

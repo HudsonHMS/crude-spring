@@ -1,7 +1,7 @@
 import { CursosFormComponent } from './../cursos/cursos-form/cursos-form.component';
 import { DialogAlertComponent } from './../shared/dialog-alert/dialog-alert.component';
 import { CursosService } from './../cursos/cursos.service';
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Cursos } from '../models/cursos';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
@@ -13,7 +13,8 @@ import { MatTable } from '@angular/material/table';
 })
 export class ListaDeCursosComponent {
 
-    constructor( private cursosService: CursosService, private dialog: MatDialog, private detector: ChangeDetectorRef ) {}
+    constructor( private cursosService: CursosService,
+                 private dialog: MatDialog ) {}
 
     public cursos!: Cursos[];
     public colunas = [ 'id', 'nome', 'valor', 'categoria', 'actions' ];
@@ -60,11 +61,26 @@ export class ListaDeCursosComponent {
           if( res.statusCode === 201 ) {
             this.dialog.closeAll();
             this.cursos.push( res.responseData );
-            this.detector.detectChanges();
             alert(res.message);
             this.table.dataSource = [];
             this.table.dataSource = this.cursos;
           }
+        }
+      );
+    }
+    openEdicao( id: number, largura = '75dvw', altura = '60dvh' ) {
+
+      this.dialog.open(CursosFormComponent, {
+        width: largura,
+        height: altura,
+        data: id,
+        id: 'formEdicao'
+      }).componentInstance.cadastroSucesso.subscribe(
+        (res) => {
+          this.table.dataSource = [];
+          this.table.dataSource = this.cursos.map( (curso) => curso.id === res.responseData.id ? curso = res.responseData : curso );
+          this.openError("Curso atualizado com sucesso!", '300px', '200px');
+          this.dialog.getDialogById('formEdicao')?.close();
         }
       );
     }
