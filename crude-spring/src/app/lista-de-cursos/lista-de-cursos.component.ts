@@ -5,6 +5,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Cursos } from '../models/cursos';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lista-de-cursos',
@@ -14,7 +16,8 @@ import { MatTable } from '@angular/material/table';
 export class ListaDeCursosComponent {
 
     constructor( private cursosService: CursosService,
-                 private dialog: MatDialog ) {}
+                 private dialog: MatDialog,
+                 private snack: MatSnackBar ) {}
 
     public cursos!: Cursos[];
     public colunas = [ 'id', 'nome', 'valor', 'categoria', 'actions' ];
@@ -81,6 +84,32 @@ export class ListaDeCursosComponent {
           this.table.dataSource = this.cursos.map( (curso) => curso.id === res.responseData.id ? curso = res.responseData : curso );
           this.openError("Curso atualizado com sucesso!", '300px', '200px');
           this.dialog.getDialogById('formEdicao')?.close();
+        }
+      );
+    }
+
+    public deleteCurso( id: number ) {
+      Swal.fire({
+        html: "<b>realmente deseja excluir este curso?</b>",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: "Deletar",
+        cancelButtonText: "Cancelar"
+      }).then(
+        opt => {
+          if(opt.isConfirmed) {
+              this.cursosService.deletarCurso( id ).subscribe({
+                next: res => {
+                    this.cursos = this.cursos.filter( el => el.id != id );
+                    this.table.dataSource = [];
+                    this.table.dataSource = this.cursos;
+                    this.snack.open("Curso delatado com sucess!", 'X', { duration: 3000, verticalPosition: 'top', horizontalPosition: 'center' });
+                },
+                error: (err) => {
+                    this.openError("Houveram erros ao deletar. Tente novamente mais tarde!", '400px', '300px');
+                },
+              });
+          }
         }
       );
     }

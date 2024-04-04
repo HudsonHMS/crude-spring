@@ -43,10 +43,20 @@ export class CursosService {
 
   atualizarCurso( curso: Cursos ): Observable<ResponseObject<Cursos>> {
     try {
-      return this.httpClient.post<ResponseObject<Cursos>>('http://localhost:4300/api/cursos/atualizar', curso).pipe(
+      return this.httpClient.put<ResponseObject<Cursos>>('http://localhost:4300/api/cursos/atualizar', curso).pipe(
         take(1)
       );
     } catch( err ) {
+      return of();
+    }
+  }
+
+  public deletarCurso( id: number ): Observable<ResponseObject<boolean>> {
+    try{
+      return this.httpClient.delete<ResponseObject<boolean>>(`http://localhost:4300/api/cursos/deletar/${id}`).pipe(
+        take(1)
+      );
+    }catch( err ) {
       return of();
     }
   }

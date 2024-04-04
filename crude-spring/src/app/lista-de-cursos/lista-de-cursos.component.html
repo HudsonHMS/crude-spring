@@ -36,7 +36,7 @@
         <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary" (click)="openEdicao(curso.id)" >
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
+        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="deleteCurso(curso.id)">
           <mat-icon aria-label="Delete" color="warn">delete</mat-icon>
         </button>
       </mat-cell>

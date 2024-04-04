@@ -4,8 +4,10 @@ import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cursos } from 'src/app/models/cursos';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogAlertComponent } from '../../shared/dialog-alert/dialog-alert.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { cursosResolver } from '../cursos.resolver';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cursos-form',
@@ -20,10 +22,11 @@ export class CursosFormComponent {
 
   constructor( private formBuilder: FormBuilder,
     private cursosService: CursosService,
-    private errorDialog: MatDialog,
     private snack: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: number,
-    private formRef: MatDialogRef<CursosFormComponent> ) {
+    private route: ActivatedRoute,
+    private location: Location ) {
+
       this.form = this.formBuilder.group({
         nome: new FormControl<string|null>(null, {
           validators: [Validators.maxLength(255), Validators.required],
@@ -58,6 +61,9 @@ export class CursosFormComponent {
       this.cursosService.atualizarCurso( this.form.value ).subscribe({
         next: (res) => {
           this.cadastroSucesso.emit( res );
+          if( this.route.snapshot.data['curso'].responseData ) {
+            this.location.back();
+          }
         }
       });
 
@@ -66,13 +72,17 @@ export class CursosFormComponent {
   }
 
   ngOnInit(): void {
-    if( this.data ) {
+
+    if(  typeof this.data === 'number' ) {
       this.cursosService.getCursoPorId( this.data ).subscribe( {
         next: ( res ) => {
           this.curso = res.responseData;
           this.form.patchValue( res.responseData );
         }
       } );
+    } else { // acesso pela rota e resolver
+      const curso: Readonly< Cursos > = this.route.snapshot.data['curso'].responseData
+      this.form.setValue( curso );
     }
   }
 
