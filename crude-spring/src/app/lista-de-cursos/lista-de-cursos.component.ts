@@ -31,7 +31,7 @@ export class ListaDeCursosComponent {
       this.cursosService.getCursos().subscribe(
         {
           next: (cursos) => {
-            this.cursos = cursos
+            this.cursos = cursos.responseData
           },
           error: (err) => {
             this.openError( 'Hoveram erros ao buscar os dados!!', '400px', '195px' )
@@ -94,7 +94,8 @@ export class ListaDeCursosComponent {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: "Deletar",
-        cancelButtonText: "Cancelar"
+        cancelButtonText: "Cancelar",
+        reverseButtons: true
       }).then(
         opt => {
           if(opt.isConfirmed) {

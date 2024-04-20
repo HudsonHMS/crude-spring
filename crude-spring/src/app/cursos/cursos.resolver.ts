@@ -8,8 +8,8 @@ import { ResponseObject } from '../models/response-object';
 export const cursosResolver: ResolveFn<Observable<ResponseObject<Cursos>> | null> =  (route, state) => {
   const cursoService = inject(CursosService);
 
-  if( route.params && route.params['id'] ) {
-    return cursoService.getCursoPorId( route.params['id'] );
+  if( route?.params && route?.params['id'] ) {
+    return cursoService?.getCursoPorId( route?.params['id'] );
   }
   return null;
 };

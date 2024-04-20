@@ -10,9 +10,9 @@ export class CursosService {
 
   constructor( private httpClient: HttpClient ) { }
 
-  getCursos(): Observable<Cursos[]> {
+  getCursos(): Observable<ResponseObject<Cursos[]>> {
     try{
-      return this.httpClient.get<Cursos[]>('http://localhost:4300/api/cursos').pipe(
+      return this.httpClient.get<ResponseObject<Cursos[]>>('http://localhost:4300/api/cursos').pipe(
         take(1),
         //delay(1000)
       );

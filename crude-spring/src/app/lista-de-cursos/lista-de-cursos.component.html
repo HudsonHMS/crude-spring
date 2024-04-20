@@ -21,7 +21,7 @@
     </ng-container>
     <ng-container matColumnDef="valor">
       <mat-header-cell *matHeaderCellDef> VALOR </mat-header-cell>
-      <mat-cell *matCellDef="let curso"> {{curso.valor}} </mat-cell>
+      <mat-cell *matCellDef="let curso"> {{curso.valor | currency:'BRL':'symbol'}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="categoria">
       <mat-header-cell *matHeaderCellDef> CATEGORIA </mat-header-cell>
