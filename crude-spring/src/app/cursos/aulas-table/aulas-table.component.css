@@ -1,0 +1,26 @@
+#btnremoveAula {
+  width: 30px;
+  height: 30px;
+}
+
+.w-55 {
+  width: 55%;
+}
+.w-40 {
+  width: 40%;
+}
+.w-5 {
+  width: 5%;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 38%;
+  -ms-transform: translateY(-38%);
+  transform: translateY(-38%);
+}
+
+.p-relative {
+  position: relative;
+}

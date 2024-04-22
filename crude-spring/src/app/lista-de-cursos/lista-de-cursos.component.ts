@@ -71,7 +71,7 @@ export class ListaDeCursosComponent {
         }
       );
     }
-    openEdicao( id: number, largura = '75dvw', altura = '60dvh' ) {
+    openEdicao( id: number, largura = '75dvw', altura = '80dvh' ) {
 
       this.dialog.open(CursosFormComponent, {
         width: largura,

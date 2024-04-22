@@ -10,13 +10,15 @@ import { ListaDeCursosComponent } from '../lista-de-cursos/lista-de-cursos.compo
 import { CategoriaPipe } from '../shared/pipes/categoria.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AulasTableComponent } from './aulas-table/aulas-table.component';
 
 @NgModule({
   declarations: [
     ListaDeCursosComponent,
     DialogAlertComponent,
     CategoriaPipe,
-    CursosFormComponent
+    CursosFormComponent,
+    AulasTableComponent
   ],
   imports: [
     MaterialModule,

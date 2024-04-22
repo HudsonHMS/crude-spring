@@ -1,9 +1,9 @@
 import { Aula } from "./aula";
 
 export interface Cursos {
-  id?: number;
+  id?: number | null;
   nome: string;
-  valor: number;
+  valor: number | null;
   categoria?: string
   aulas?: Aula[];
 }
