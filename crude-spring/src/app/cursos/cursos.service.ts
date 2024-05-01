@@ -10,11 +10,12 @@ export class CursosService {
 
   constructor( private httpClient: HttpClient ) { }
 
-  getCursos(): Observable<ResponseObject<Cursos[]>> {
+  getCursos( pagina = 0, limit = 5 ): Observable<ResponseObject<Cursos[]>> {
     try{
-      return this.httpClient.get<ResponseObject<Cursos[]>>('http://localhost:4300/api/cursos').pipe(
-        take(1),
-        //delay(1000)
+      return this.httpClient.get<ResponseObject<Cursos[]>>("http://localhost:4300/api/cursos", {
+        params: { pagina, limit }
+      }).pipe(
+        take(1)
       );
     } catch( err ) {
       return from([]);

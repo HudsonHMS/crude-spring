@@ -11,6 +11,8 @@ import { CategoriaPipe } from '../shared/pipes/categoria.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AulasTableComponent } from './aulas-table/aulas-table.component';
+import { PaginatorComponent } from '../shared/paginator/paginator.component';
+import { ShowPagesOptionsDirective } from '../shared/paginator/show-pages-options.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AulasTableComponent } from './aulas-table/aulas-table.component';
     DialogAlertComponent,
     CategoriaPipe,
     CursosFormComponent,
-    AulasTableComponent
+    AulasTableComponent,
+    PaginatorComponent,
+    ShowPagesOptionsDirective
   ],
   imports: [
     MaterialModule,

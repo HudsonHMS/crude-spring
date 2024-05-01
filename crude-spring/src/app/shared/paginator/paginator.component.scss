@@ -1,0 +1,47 @@
+.page-button {
+    width: 25px;
+    height: 31px;
+    color: #FFF;
+    background-color: #f4511e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 3px;
+    border-radius: 3px;
+    transition: all .3s
+}
+
+.page-button:hover{
+  background: gray
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: gray;
+}
+
+.destaque {
+  color: #FFF;
+  background-color: rgb(1, 142, 123);
+  pointer-events: none
+}
+
+.qtd-pages::ng-deep {
+  width: 70px;
+  height:53px;
+  font-size: .75rem;
+}
+
+::ng-deep {
+  .qtd-pages .mat-mdc-form-field-flex { height: 40px !important;}
+  .qtd-pages .mat-mdc-text-field-wrapper {
+    width: 70px !important;
+    height: 30px !important;
+    background-color: #FFF !important;
+    align-items: flex-end !important;
+  }
+}
+

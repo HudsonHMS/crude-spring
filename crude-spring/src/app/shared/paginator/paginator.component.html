@@ -1,0 +1,38 @@
+<div class="row mt-3">
+  <div class="col-12 d-flex justify-content-center">
+    <div *ngIf="getShowpagesOptions">
+      <mat-form-field class="qtd-pages">
+        <mat-select [(value)]="defaultQtdofPages" (selectionChange)="onPaginate(0)">
+          <mat-option *ngFor="let opt of getPagesSizeOptions; let i = index"
+           [value]="opt">
+              {{opt}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div
+      class="anterior page-button"
+      [class]="{ disabled: getPaginaAtual === 0 }"
+      (click)="onPaginate(getPaginaAtual - 1)"
+    >
+      <
+    </div>
+    <div #div
+      *ngFor="let page of pages; let i = index"
+      class="page-button"
+      (click)="onPaginate(i)"
+      [id]="i"
+      [class] = "{destaque:i === getPaginaAtual}"
+    >
+      {{ i + 1 }}
+    </div>
+    <div
+      class="posterior page-button"
+      [class]="{ disabled: pages.length === ( getPaginaAtual + 1 ) }"
+      (click)="onPaginate(getPaginaAtual + 1)"
+    >
+      >
+    </div>
+  </div>
+</div>

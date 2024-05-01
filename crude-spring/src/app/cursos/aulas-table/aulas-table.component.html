@@ -9,7 +9,7 @@
 
     </thead>
     <tbody>
-      <tr *ngFor="let aula of getAulasControls().controls; let i = index" formArrayName="aulas" class="align-items-center w-100">
+      <tr *ngFor="let aula of getAulasControls()?.controls ?? []; let i = index" formArrayName="aulas" class="align-items-center w-100">
         <td [formGroupName] = "i" class="w-55">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Aula</mat-label>

@@ -7,6 +7,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environment/environment ';
+import { Paginate } from '../models/paginate';
 
 @Component({
   selector: 'app-lista-de-cursos',
@@ -23,23 +25,20 @@ export class ListaDeCursosComponent {
     public colunas = [ 'id', 'nome', 'valor', 'categoria', 'actions' ];
     public load:boolean = true;
     private formCad!: MatDialogRef<CursosFormComponent>;
+    public totalPages!: number | undefined;
+    public totalElements!: number | undefined;
+
+    get limit() : number {
+      return environment.qtdItensPaginaCursos;
+    }
+    get initialPage() : number {
+      return environment.paginaInicial;
+    }
 
     @ViewChild('table') private table!: MatTable<Cursos>;
 
     ngOnInit(): void {
-
-      this.cursosService.getCursos().subscribe(
-        {
-          next: (cursos) => {
-            this.cursos = cursos.responseData
-          },
-          error: (err) => {
-            this.openError( 'Hoveram erros ao buscar os dados!!', '400px', '195px' )
-            this.load = false
-          },
-          complete: () => { this.load = false }
-        }
-      );
+      this.getCursos( this.initialPage, this.limit );
     }
 
     openError( msg: string, width: string, heigth: string ): void {
@@ -110,6 +109,31 @@ export class ListaDeCursosComponent {
                     this.openError("Houveram erros ao deletar. Tente novamente mais tarde!", '400px', '300px');
                 },
               });
+          }
+        }
+      );
+    }
+
+    public paginate( event: Paginate ) {
+      this.getCursos( event.page, event.limit );
+    }
+
+    private getCursos( page: number, limit: number ): void {
+      this.load = true;
+      this.cursosService.getCursos( page, limit ).subscribe(
+        {
+          next: (cursos) => {
+            this.cursos = cursos.responseData
+            this.totalPages = cursos.totalPages;
+            this.totalElements = cursos.totalRegistros;
+          },
+          error: (err) => {
+            this.openError( 'Hoveram erros ao buscar os dados!!', '400px', '195px' )
+            this.load = false
+          },
+          complete: () => {
+            this.load = false;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }
       );

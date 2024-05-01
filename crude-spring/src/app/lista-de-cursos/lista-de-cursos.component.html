@@ -46,6 +46,10 @@
   </mat-table>
 </div>
 
+<div class="row">
+  <app-paginator showPagesOptions [totalItens]="totalElements ?? 10" [limit]="limit" (paginate)="paginate($event)"></app-paginator>
+</div>
+
 <ng-template #loading>
   <div class="loading">
     <mat-spinner class="center" #spinner></mat-spinner>
